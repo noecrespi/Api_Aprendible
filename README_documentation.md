@@ -15,7 +15,7 @@ Crear los modelos con ayuda de blueprint
 composer require laravel-shift/blueprint --dev
 ```
 
-Cracion de archivo donde estara el esquema de lo que queremos generar
+Creción de archivo donde estara el esquema de lo que queremos generar
 ```bash
 php artisan blueprint:new
 ```
@@ -34,7 +34,7 @@ models:
     Category:
         name: string
         slug: string unique
-        relationship:
+        relationships:
             hasMany: Article
 
 ```
@@ -44,11 +44,12 @@ Publicar archivo de configuracion del paquete
 php artisan vendor:publish 
 ```
 
-seleccionar:
-    > blueprint-config    
+    seleccionar:
+        > blueprint-config    
 
 
 (Hacer cositas de en config/blueprint.php)
+Cambiar: 
 
 Generar los archivos
 ```bash
@@ -60,3 +61,5 @@ planos de contrucion para generar los archivos
 ```bash
 php artisan stub:publish
 ```
+Eliminar todo lo que no necesitamos en la carpeta `stubs/blueprint` (eliminar todos los archivos menos  `test.stub` y `test.unit.stub`). Dejamos la carpeta `stubs/blueprint` llena .
+
