@@ -9,5 +9,5 @@ models:
   Category:
     name: string
     slug: string unique
-    relationship:
+    relationships:
       hasMany: Article
