@@ -67,7 +67,7 @@ entrar stubs/test.stub y copiar lo que tengo puesto
 
 
 
-## Impelementacion de rutas para obtener articulos  
+## Impelementacion de rutas para obtener articulos    -> test --filter can_fetch_all_articles
 
 
 Eliminar los archivos de las carpetas `tests/Feature` y `tests/Unit`.
@@ -108,3 +108,5 @@ php artisan make:resource ArticleResource
 ```
 Añadido cosas en app/Http/Resources/ArticleResource.php
 Article controller
+
+php artisan make:resource ArticleCollection 
