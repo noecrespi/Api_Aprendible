@@ -67,7 +67,9 @@ entrar stubs/test.stub y copiar lo que tengo puesto
 
 
 
-## Impelementacion de rutas para obtener articulos    -> test --filter can_fetch_all_articles
+## Impelementacion de rutas para obtener articulos    -> 
+- test --filter can_fetch_all_articles -> ver que pasa el test
+- php artisan route:list -> ver que se han creado las rutas 2
 
 
 Eliminar los archivos de las carpetas `tests/Feature` y `tests/Unit`.
@@ -110,3 +112,10 @@ Añadido cosas en app/Http/Resources/ArticleResource.php
 Article controller
 
 php artisan make:resource ArticleCollection 
+
+
+
+## Ruta para crear articulos 
+- php artisan test -> ver que pasan los test
+
+php artisan make:test Articles/CreateArticleTest
