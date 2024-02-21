@@ -119,3 +119,9 @@ php artisan make:resource ArticleCollection
 - php artisan test -> ver que pasan los test
 
 php artisan make:test Articles/CreateArticleTest
+
+## Middleware para verificar de los headers JSON:API
+
+php artisan make:test ValidateJsonApiHeaderTest
+
+php artisan make:middleware ValidateJsonApiHeaders
