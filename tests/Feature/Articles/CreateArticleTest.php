@@ -15,7 +15,7 @@ class CreateArticleTest extends TestCase
     /**
      * @test
      */
-    public function test_example(): void
+    public function can_create_articles(): void
     {
         $this->withoutExceptionHandling();
         $response = $this->postJson(
