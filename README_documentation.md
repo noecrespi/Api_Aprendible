@@ -132,6 +132,19 @@ Hay que modificar el json de  MakesJsonApiRequests (añaidr el $options = 0 )
     public function postJson($uri, array $data = [], array $headers = [],  $options = 0 ): TestResponse
 
 
+## vAlidacion del documentos Json:API
+php artisan test 
+
+php artisan make:test ValidateJsonApiDocumentTest
+
+php artisan make:middleware ValidationJsonApiDocument
+
+
+
+
+IR CON CUIDODO EN 13 NO VA BIEN ....
 
 
 php artisan test 
+
+

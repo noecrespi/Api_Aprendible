@@ -3,9 +3,11 @@
 namespace Tests;
 
 use Closure;
+use Illuminate\Support\Str;
 use Illuminate\Testing\TestResponse;
 use PHPUnit\Framework\Assert as PHPUnit;
 use PHPUnit\Framework\ExpectationFailedException;
+
 
 trait MakesJsonApiRequests
 {
@@ -24,9 +26,12 @@ trait MakesJsonApiRequests
         return function ($attribute) {
             /** @var TestResponse $this */
 
+            //verifivacar si atribute empieza con data no se añade el prefijo data.attributes
+            $pointer = Str::of($attribute)->startsWith('data') ? "/".str_replace('.' , '/' , $attribute) : "/data/attributes/{$attribute}";
+            
             try {
                 $this->assertJsonFragment([
-                    'source' => ['pointer' => "/data/attributes/{$attribute}"]
+                    'source' => ['pointer' => $pointer],
                 ]);
             } catch (ExpectationFailedException $e) {
                 // Fallo no encuetra el JSON:API validation error

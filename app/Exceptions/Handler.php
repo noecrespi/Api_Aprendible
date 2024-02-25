@@ -3,15 +3,24 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Throwable;
 use Illuminate\Validation\ValidationException;
+use Throwable;
 
 class Handler extends ExceptionHandler
 {
     /**
-     * The list of the inputs that are never flashed to the session on validation exceptions.
+     * A list of the exception types that are not reported.
      *
-     * @var array<int, string>
+     * @var array
+     */
+    protected $dontReport = [
+        //
+    ];
+
+    /**
+     * A list of the inputs that are never flashed for validation exceptions.
+     *
+     * @var array
      */
     protected $dontFlash = [
         'current_password',
@@ -21,8 +30,10 @@ class Handler extends ExceptionHandler
 
     /**
      * Register the exception handling callbacks for the application.
+     *
+     * @return void
      */
-    public function register(): void
+    public function register()
     {
         $this->reportable(function (Throwable $e) {
             //
@@ -32,22 +43,7 @@ class Handler extends ExceptionHandler
     protected function invalidJson($request, ValidationException $exception)
     {
         $title = $exception->getMessage();
-        // $errors = [];
-        
-        // foreach($exception->errors() as $field => $menssage){
-        //     $pointer = "/" . str_replace('.' , '/' , $field);
 
-        //     $errors[] = [
-        //         'title' => $title,
-        //         'details' => $menssage[0],
-        //         'source' => [
-        //             'pointer' => $pointer
-        //         ]
-        //     ];
-        // };
-        // return response()->json([
-        //     'errors' => $errors
-        // ], 422);
         return response()->json([
             'errors' => collect($exception->errors())
                 ->map(function($messages, $field) use ($title) {
@@ -59,6 +55,8 @@ class Handler extends ExceptionHandler
                         ]
                     ];
                 })->values()
-        ], 422);
+        ], 422, [
+            'content-type' => 'application/vnd.api+json'
+        ]);
     }
 }
