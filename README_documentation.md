@@ -125,3 +125,9 @@ php artisan make:test Articles/CreateArticleTest
 php artisan make:test ValidateJsonApiHeaderTest
 
 php artisan make:middleware ValidateJsonApiHeaders
+
+
+
+Hay que modificar el json de  MakesJsonApiRequests (añaidr el $options = 0 )
+    public function postJson($uri, array $data = [], array $headers = [],  $options = 0 ): TestResponse
+
