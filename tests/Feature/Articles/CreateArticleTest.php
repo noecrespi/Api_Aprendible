@@ -21,7 +21,7 @@ class CreateArticleTest extends TestCase
     {
         $this->withoutExceptionHandling();
         $response = $this->postJson(
-            route('api.v1.articles.create'),
+            route('api.v1.articles.store'),
             [
                 'data' => [
                     'type' => 'articles',
@@ -66,7 +66,7 @@ class CreateArticleTest extends TestCase
     public function title_is_required(): void
     {
         $response = $this->postJson(
-            route('api.v1.articles.create'),
+            route('api.v1.articles.store'),
             [
                 'data' => [
                     'type' => 'articles',
@@ -106,7 +106,7 @@ class CreateArticleTest extends TestCase
     public function slug_is_required(): void
     {
         $response = $this->postJson(
-            route('api.v1.articles.create'),
+            route('api.v1.articles.store'),
             [
                 'data' => [
                     'type' => 'articles',
@@ -129,7 +129,7 @@ class CreateArticleTest extends TestCase
     public function content_is_required(): void
     {
         $response = $this->postJson(
-            route('api.v1.articles.create'),
+            route('api.v1.articles.store'),
             [
                 'data' => [
                     'type' => 'articles',
@@ -163,7 +163,7 @@ class CreateArticleTest extends TestCase
     //el titulo tiene que tener minimo 4 caracteres
     public function title_must_be_at_least_4_characters()
     {
-        $response = $this->postJson(route('api.v1.articles.create'), [
+        $response = $this->postJson(route('api.v1.articles.store'), [
             'data' => [
                 'type' => 'articles',
                 'attributes' => [
