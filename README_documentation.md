@@ -68,7 +68,7 @@ entrar stubs/test.stub y copiar lo que tengo puesto
 
 
 ## Impelementacion de rutas para obtener articulos    -> 
-- test --filter can_fetch_all_articles -> ver que pasa el test
+- php artisan test --filter can_fetch_all_articles -> ver que pasa el test
 - php artisan route:list -> ver que se han creado las rutas 2
 
 
@@ -140,8 +140,15 @@ php artisan make:test ValidateJsonApiDocumentTest
 php artisan make:middleware ValidationJsonApiDocument
 
 
+## 16. Actualizacion de articulos // Cómo actualizar recursos siguiendo la especificación JSON:API
+php artisan test --filter can_update_articles
+
+php artisan test 
 
 
+
+
+-----------
 IR CON CUIDODO EN 13 NO VA BIEN ....
 
 
