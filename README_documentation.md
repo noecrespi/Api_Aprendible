@@ -145,10 +145,15 @@ php artisan test --filter can_update_articles
 
 php artisan test 
 
-## 17.  Eliminar arrticulos
+## 17.  Eliminar arrticulos  mirar mi commit!!!
 php artisan make:test Articles/DeleteArticleTest
 
-php artisan make:request SaveArticleRequest
+php artisan make:request SaveArticleRequest   -> hay un error con el SaveArticleRequest  hayq ue eminiar la funcion valildated() y en earticle controller hay que añadir contenido a         
+
+    $article = Article::create($request->validated()['data']['attributes']);
+    $article->update($request->validated()['data']['attributes']);
+
+
 
 -----------
 IR CON CUIDODO EN 13 NO VA BIEN ....
