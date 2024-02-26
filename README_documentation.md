@@ -145,8 +145,10 @@ php artisan test --filter can_update_articles
 
 php artisan test 
 
+## 17.  Eliminar arrticulos
+php artisan make:test Articles/DeleteArticleTest
 
-
+php artisan make:request SaveArticleRequest
 
 -----------
 IR CON CUIDODO EN 13 NO VA BIEN ....
