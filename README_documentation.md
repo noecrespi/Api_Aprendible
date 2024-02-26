@@ -148,10 +148,15 @@ php artisan test
 ## 17.  Eliminar arrticulos  mirar mi commit!!!
 php artisan make:test Articles/DeleteArticleTest
 
-php artisan make:request SaveArticleRequest   -> hay un error con el SaveArticleRequest  hayq ue eminiar la funcion valildated() y en earticle controller hay que añadir contenido a         
+php artisan make:request SaveArticleRequest   -> hay un error con el SaveArticleRequest  hayq ue eminiar la funcion valildated() y en Articlecontroller hay que añadir contenido a         
 
     $article = Article::create($request->validated()['data']['attributes']);
     $article->update($request->validated()['data']['attributes']);
+
+##18 - Validación avanzada del slug
+php artisan make:rule Slug
+
+Crera a mano el archivo idioma en resources/lang/en/validation.php (apartado 18)
 
 
 
