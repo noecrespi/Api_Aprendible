@@ -11,6 +11,7 @@ use PHPUnit\Framework\ExpectationFailedException;
 
 trait MakesJsonApiRequests
 {
+    protected bool $formatJsonApiDocument = true;
     protected function setUp(): void
     {
         parent::setUp();
@@ -19,6 +20,11 @@ trait MakesJsonApiRequests
             'assertJsonApiValidationErrors',
             $this->assertJsonApiValidationErrors()
         );
+    }
+
+    public function withoutJsonApiDocumentFormatting()
+    {
+        $this->formatJsonApiDocument = false;
     }
 
     protected function assertJsonApiValidationErrors(): Closure
@@ -67,7 +73,14 @@ trait MakesJsonApiRequests
     {
         $headers['accept'] = 'application/vnd.api+json';
 
-        return parent::json($method, $uri, $data, $headers);
+        if ($this->formatJsonApiDocument) {
+            $formattedData['data']['attributes'] = $data;
+            $formattedData['data']['type'] = (string) Str::of($uri)->after('api/v1/');
+        }
+
+
+
+        return parent::json($method, $uri, $formattedData ?? $data, $headers);
     }
     
     public function getJson($uri, array $headers = [],  $options = 0 )

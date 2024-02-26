@@ -13,28 +13,17 @@ use Tests\TestCase;
 class CreateArticleTest extends TestCase
 {
     use RefreshDatabase;
-    
+
     /**
      * @test
      */
-    public function can_create_articles(): void
+       public function can_create_articles()
     {
-        // $this->withoutExceptionHandling();
-        $response = $this->postJson(
-            route('api.v1.articles.store'),
-            [
-                'data' => [
-                    'type' => 'articles',
-                    'attributes' => [
-                        'title' => 'Create title',
-                        'slug' => 'ejmeplo-articulo',
-                        'content' => 'Contenido del articulo'
-                    ]
-                ]
-            ]
-        );
-        // verificación de codigo de estado
-        $response->assertCreated();
+        $response = $this->postJson(route('api.v1.articles.store'), [
+            'title' => 'Nuevo artículo',
+            'slug' => 'nuevo-articulo',
+            'content' => 'Contenido del artículo'
+        ])->assertCreated();
 
         $article = Article::first();
 
@@ -48,9 +37,9 @@ class CreateArticleTest extends TestCase
                 'type' => 'articles',
                 'id' => (string) $article->getRouteKey(),
                 'attributes' => [
-                    'title' => 'Create title',
-                    'slug' => 'ejmeplo-articulo',
-                    'content' => 'Contenido del articulo'
+                    'title' => 'Nuevo artículo',
+                    'slug' => 'nuevo-articulo',
+                    'content' => 'Contenido del artículo'
                 ],
                 'links' => [
                     'self' => route('api.v1.articles.show', $article)
@@ -58,45 +47,16 @@ class CreateArticleTest extends TestCase
             ]
         ]);
     }
-
     /**
      * @test
      */
     // el titulo es requerido 
     public function title_is_required(): void
     {
-        $response = $this->postJson(
-            route('api.v1.articles.store'),
-            [
-                'data' => [
-                    'type' => 'articles',
-                    'attributes' => [
-                        // 'title' => 'Create title',
-                        'slug' => 'ejmeplo-articulo',
-                        'content' => 'Contenido del articulo'
-                    ]
-                ]
-            ]
-                    );
-
-                    
-        // verificación de codigo de estado
-        // $response->assertJsonApiValidationErrors('data.attributes.title');
-
-        //verificar la estructura del objeto error
-        // $response->assertJsonStructure([
-        //     'errors' => [
-        //         ['title', 'detail', 'source' => ['pointer']]
-        //     ]
-        // ])->assertJsonFragment([
-        //     'source' => ['pointer' => '/data/attributes/title']
-        // ])->assertHeader(
-        //     'content-type',
-        //     'application/vnd.api+json'
-        // )->assertStatus(422);
-
-        $response->assertJsonApiValidationErrors('title');
-
+        $this->postJson(route('api.v1.articles.store'), [
+            'slug' => 'nuevo-articulo',
+            'content' => 'Contenido del artículo'
+        ])->assertJsonApiValidationErrors('title');
     }
 
     /**
@@ -105,21 +65,10 @@ class CreateArticleTest extends TestCase
     // el slug es requerido 
     public function slug_is_required(): void
     {
-        $response = $this->postJson(
-            route('api.v1.articles.store'),
-            [
-                'data' => [
-                    'type' => 'articles',
-                    'attributes' => [
-                        // 'title' => 'Create title',
-                        'title' => 'Nuevo Articulo',
-                        'content' => 'Contenido del artículo'
-                    ]
-                ]
-            ]
-        );
-        // verificación de codigo de estado
-        $response->assertJsonApiValidationErrors('slug');
+        $this->postJson(route('api.v1.articles.store'), [
+            'title' => 'Nuevo Articulo',
+            'content' => 'Contenido del artículo'
+        ])->assertJsonApiValidationErrors('slug');
     }
 
     /**
@@ -128,33 +77,10 @@ class CreateArticleTest extends TestCase
     // el contenido es requerido 
     public function content_is_required(): void
     {
-        $response = $this->postJson(
-            route('api.v1.articles.store'),
-            [
-                'data' => [
-                    'type' => 'articles',
-                    'attributes' => [
-                        // 'title' => 'Create title',
-                        'title' => 'Nuevo Articulo',
-                        'slug' => 'nuevo-articulo'
-                    ]
-                ]
-            ]
-        );
-        // verificación de codigo de estado
-        // $response->assertJsonValidationErrors('data.attributes.content');
-
-        // $response->assertJsonStructure([
-        //     'errors' => [
-        //         ['title', 'detail', 'source' => ['pointer']]
-        //     ]
-        // ])->assertJsonFragment([
-        //     'source' => ['pointer' => '/data/attributes/title']
-        // ])->assertHeader(
-        //     'content-type',
-        //     'application/vnd.api+json'
-        // )->assertStatus(422);
-        $response->assertJsonApiValidationErrors('content');
+        $this->postJson(route('api.v1.articles.store'), [
+            'title' => 'Nuevo Articulo',
+            'slug' => 'nuevo-articulo'
+        ])->assertJsonApiValidationErrors('content');
     }
 
     /**
@@ -163,17 +89,10 @@ class CreateArticleTest extends TestCase
     //el titulo tiene que tener minimo 4 caracteres
     public function title_must_be_at_least_4_characters()
     {
-        $response = $this->postJson(route('api.v1.articles.store'), [
-            'data' => [
-                'type' => 'articles',
-                'attributes' => [
-                    'title' => 'Nue',
-                    'slug' => 'nuevo-articulo',
-                    'content' => 'Contenido del artículo'
-                ]
-            ]
-        ]);
-
-        $response->assertJsonApiValidationErrors('title');  
+        $this->postJson(route('api.v1.articles.store'), [
+            'title' => 'Nue',
+            'slug' => 'nuevo-articulo',
+            'content' => 'Contenido del artículo'
+        ])->assertJsonApiValidationErrors('title');
     }
 }
