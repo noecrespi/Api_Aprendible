@@ -158,7 +158,7 @@ php artisan make:rule Slug
 
 Crera a mano el archivo idioma en resources/lang/en/validation.php (apartado 18)
 
-
+## 19 Cómo ordenar registros con Eloquent
 
 -----------
 IR CON CUIDODO EN 13 NO VA BIEN ....
